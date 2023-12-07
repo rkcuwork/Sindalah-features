@@ -1,0 +1,1 @@
+npm create vite@latest ./ ---> used to create current directory a react project
