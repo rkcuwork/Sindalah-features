@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -22,10 +22,12 @@ const SignUpForm = () => {
   const navigate = useNavigate();
 
   const {checkAuthUser, isLoading:isUserLoading} = useUserContext();
-
+  console.log(isUserLoading);
+  
   const {mutateAsync: createUserAccount, isPending: isCreatingAccount} = useCreateUserAccount();
-
+  
   const {mutateAsync: signInAccount, isPending: isSigningIn} = useSignInAccount();
+  console.log(isSigningIn);
     // 1. Define your form.
   const form = useForm<z.infer<typeof SignUpValidation>>({
     resolver: zodResolver(SignUpValidation),

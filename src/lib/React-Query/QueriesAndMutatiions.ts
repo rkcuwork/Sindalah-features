@@ -1,8 +1,8 @@
 import {
-    useQuery,
+    // useQuery,
     useMutation,
-    useQueryClient,
-    useInfiniteQuery,
+    // useQueryClient,
+    // useInfiniteQuery,
 } from '@tanstack/react-query';
 import { createUserAccount, signInAccount } from '../Appwrite/api';
 import { INewUser } from '@/types';
