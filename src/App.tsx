@@ -26,12 +26,12 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route element={<AuthLayout/>}>
-          <Route path='/sign-in' element={<SignInForm/>}/>
-          <Route path='/sign-up' element={<SignUpForm/>}/>
+          <Route path='Sindalah/sign-in' element={<SignInForm/>}/>
+          <Route path='Sindalah/sign-up' element={<SignUpForm/>}/>
         </Route>
 
         {/* Private Routes */}
-        <Route element={<RootLayout/>}>
+        <Route path='Sindalah' element={<RootLayout/>}>
           <Route index element={<Home/>}/>
         </Route>
 
