@@ -65,7 +65,7 @@ const SignUpForm = () => {
 
     if(isLoggedIn){
       form.reset();
-      navigate('/');
+      navigate('/Sindalah');
     }
     else{
       return  toast({
