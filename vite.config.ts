@@ -4,9 +4,9 @@ import { defineConfig, BuildOptions } from "vite"
 
 
 export default defineConfig({
-  // build: {
-  //   envDir: process.cwd(),
-  // },
+  build: {
+    envDir: process.cwd(),
+  },
   plugins: [react()],
   resolve: {
     alias: {
