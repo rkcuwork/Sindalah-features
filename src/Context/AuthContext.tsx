@@ -31,6 +31,7 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
     const navigate = useNavigate();
 
     const checkAuthUser = async () =>{
+      setisLoading(true);
       try {
         const currentAccount = await getCurrentUser();
 
@@ -60,13 +61,18 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
     };
 
 
-    useEffect(()=>{
-      // localStorage.getItem("cookieFallback")===null
-      if(localStorage.getItem("cookieFallback")=== '[]'){
-        navigate("/sign-in");
-        checkAuthUser();
+    useEffect(() => {
+      const cookieFallback = localStorage.getItem("cookieFallback");
+      if (
+        cookieFallback === "[]" ||
+        cookieFallback === null ||
+        cookieFallback === undefined
+      ) {
+        navigate("/Sindalah/sign-in");
       }
-    },[])
+  
+      // checkAuthUser();
+    }, []);
 
     const value = {
         user,

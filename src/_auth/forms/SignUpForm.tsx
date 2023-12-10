@@ -22,12 +22,12 @@ const SignUpForm = () => {
   const navigate = useNavigate();
 
   const {checkAuthUser, isLoading:isUserLoading} = useUserContext();
-  console.log(isUserLoading);
+  // console.log(isUserLoading);
   
   const {mutateAsync: createUserAccount, isPending: isCreatingAccount} = useCreateUserAccount();
   
   const {mutateAsync: signInAccount, isPending: isSigningIn} = useSignInAccount();
-  console.log(isSigningIn);
+  // console.log(isSigningIn);
     // 1. Define your form.
   const form = useForm<z.infer<typeof SignUpValidation>>({
     resolver: zodResolver(SignUpValidation),
@@ -65,7 +65,7 @@ const SignUpForm = () => {
 
     if(isLoggedIn){
       form.reset();
-      navigate('/Sindalah');
+      navigate('/Sindalah/');
     }
     else{
       return  toast({
@@ -143,7 +143,7 @@ const SignUpForm = () => {
             )}
           />
           <Button type="submit" className="shad-button_primary">
-            {isCreatingAccount?
+            {isCreatingAccount || isUserLoading || isSigningIn?
             (<div className="flex-center gap-2">
               <Loader/> Loading...
             </div>):
