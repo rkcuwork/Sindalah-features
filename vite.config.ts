@@ -1,8 +1,12 @@
 import path from "path"
 import react from "@vitejs/plugin-react"
-import { defineConfig } from "vite"
+import { defineConfig, BuildOptions } from "vite"
+
 
 export default defineConfig({
+  // build: {
+  //   envDir: process.cwd(),
+  // },
   plugins: [react()],
   resolve: {
     alias: {

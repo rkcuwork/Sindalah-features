@@ -20,6 +20,16 @@ concurrency:
   group: 'pages'
   cancel-in-progress: true
 
+#Allow repo secrets
+env:
+  VITE_APPWRITE_URL: ${{ secrets.VITE_APPWRITE_URL }}
+  VITE_APPWRITE_PROJECT_ID: ${{ secrets.VITE_APPWRITE_PROJECT_ID }}
+  VITE_APPWRITE_DATABASE_ID: ${{ secrets.VITE_APPWRITE_DATABASE_ID }}
+  VITE_APPWRITE_SAVES_COLLECTION_ID: ${{ secrets.VITE_APPWRITE_SAVES_COLLECTION_ID }}
+  VITE_APPWRITE_USERS_COLLECTION_ID: ${{ secrets.VITE_APPWRITE_USERS_COLLECTION_ID }}
+  VITE_APPWRITE_POSTS_COLLECTION_ID: ${{ secrets.VITE_APPWRITE_POSTS_COLLECTION_ID }}
+  VITE_APPWRITE_STORAGE_ID: ${{ secrets.VITE_APPWRITE_STORAGE_ID }}
+
 jobs:
   # Single deploy job since we're just deploying
   deploy:
