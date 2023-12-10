@@ -10,6 +10,17 @@ import { Toaster } from "@/components/ui/toaster"
 
 function App() {
 
+  const secret = {projectId: import.meta.env.VITE_APPWRITE_PROJECT_ID,
+    url:import.meta.env.VITE_APPWRITE_URL,
+    databaseId: import.meta.env.VITE_APPWRITE_DATABASE_ID,
+    storageId: import.meta.env.VITE_APPWRITE_STORAGE_ID,
+    userCollectionId: import.meta.env.VITE_APPWRITE_USERS_COLLECTION_ID,
+    postCollectionId: import.meta.env.VITE_APPWRITE_POSTS_COLLECTION_ID,
+    savesCollectionId: import.meta.env.VITE_APPWRITE_SAVES_COLLECTION_ID,}
+
+  console.log("project id - > ",secret.projectId);
+  console.log("storage id - > ",secret.storageId);
+
   return (
     <main className='flex h-screen'>
       <Routes>
