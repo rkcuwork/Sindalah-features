@@ -11,6 +11,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast"
 import {  useSignInAccount } from "@/lib/React-Query/QueriesAndMutatiions";
 import { useUserContext } from "@/Context/AuthContext";
+import { isEmailVerified } from "@/lib/Appwrite/api";
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 
 
  
@@ -20,9 +23,15 @@ const SignInForm = () => {
   const { toast } = useToast();
   // const isloading = false;
   const navigate = useNavigate();
+  const [cookies,setCookie] = useCookies();
+  
+  useEffect(()=>{
+    if(cookies.emailVerification && localStorage.getItem("user")){
+      navigate("/Sindalah/");
+    }
+  },[])
 
-  const {checkAuthUser, isLoading:isUserLoading} = useUserContext();
-  // console.log(isUserLoading);
+  const {user,checkAuthUser, isLoading:isUserLoading} = useUserContext();
   
 
   
@@ -52,10 +61,17 @@ const SignInForm = () => {
     }
 
     const isLoggedIn = await checkAuthUser();
+    const verifiedEmail = await isEmailVerified();
+    console.log("user = ",user);
 
-    if(isLoggedIn){
+    if(isLoggedIn && verifiedEmail){
       form.reset();
-      navigate('/Sindalah');
+      setCookie('emailVerification', true, { path: '/'});
+      navigate('/Sindalah/');
+    }
+    else if(isLoggedIn){
+      form.reset();
+      navigate('/Sindalah/verify/email')
     }
     else{
       return  toast({
@@ -108,7 +124,7 @@ const SignInForm = () => {
           <Button type="submit" className="shad-button_primary">
             {isSigningIn || isUserLoading?
             (<div className="flex-center gap-2">
-              <Loader/> Loading...
+              <Loader/> Signing in...
             </div>):
             ("Sign In")}
           </Button>

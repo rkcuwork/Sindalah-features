@@ -59,6 +59,7 @@ export async function saveUserToDB(user:{
 export async function signInAccount(user: {email:string; password:string;}){
     try {
         const session = await account.createEmailSession(user.email,user.password);
+        // console.log("session is ==> ",session);
         return session;
         
     } catch (error) {
@@ -68,7 +69,9 @@ export async function signInAccount(user: {email:string; password:string;}){
 
 export async function getCurrentUser() {
     try {
+      
         const currentAccount = await account.get();
+        console.log('currentAccount --> ', currentAccount)
 
         if(!currentAccount){
             throw Error;
@@ -81,9 +84,57 @@ export async function getCurrentUser() {
 
         if(!currentUser) throw Error;
 
+        currentUser.documents[0].emailVerification = currentAccount.emailVerification;
+        currentUser.documents[0].phoneVerification = currentAccount.phoneVerification;
         return currentUser.documents[0];
     } catch (error) {
         console.log("Appwrite :: api :: getCurrentUser :: error-->",error);
 
     }
+}
+
+export async function sendEmailVerificationLink() {
+    try{
+        const email = account.createVerification('http://localhost:5173/Sindalah/verify-email');
+        console.log("Appwrite :: api :: sendEmailVerificationLink :: success --> ",email);
+        return true;
+    }
+    catch(error){
+        console.log("Appwrite :: api :: sendEmailVerificationLink :: error-->",error);
+        return false;
+    }
+    
+    
+}
+
+export async function verifyEmail(userId:string,secret:string){
+    try{
+        const promise = await account.updateVerification(userId, secret);
+        console.log("Appwrite :: api :: verifyEmail :: success-->",promise);
+        return true;
+    }
+    catch(error){
+        console.log("Appwrite :: api :: verifyEmail :: error-->",error);
+        return false;
+    }
+    
+}
+
+export async function isEmailVerified(){
+    try{
+        const user = await getCurrentUser();
+        if(user){
+            console.log("Appwrite :: api :: isEmailVerified :: success-->",user);
+            return user.emailVerification;
+        }
+        else{
+            console.log("Appwrite :: api :: isEmailVerified :: success but user not found-->",user);
+            return false;
+        }
+    }
+    catch(error){
+        console.log("Appwrite :: api :: isEmailVerified :: error-->",error);
+        return false;
+    }
+    
 }

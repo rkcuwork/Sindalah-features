@@ -11,6 +11,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast"
 import { useCreateUserAccount, useSignInAccount } from "@/lib/React-Query/QueriesAndMutatiions";
 import { useUserContext } from "@/Context/AuthContext";
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 
 
  
@@ -19,9 +21,15 @@ import { useUserContext } from "@/Context/AuthContext";
 const SignUpForm = () => {
   const { toast } = useToast();
   // const isloading = false;
+  const [cookies] = useCookies();
+  useEffect(()=>{
+    if(cookies.emailVerification || localStorage.getItem("user")){
+      navigate("/Sindalah/");
+    }
+  },[])
   const navigate = useNavigate();
 
-  const {checkAuthUser, isLoading:isUserLoading} = useUserContext();
+  const {user,checkAuthUser, isLoading:isUserLoading} = useUserContext();
   // console.log(isUserLoading);
   
   const {mutateAsync: createUserAccount, isPending: isCreatingAccount} = useCreateUserAccount();
@@ -63,9 +71,13 @@ const SignUpForm = () => {
 
     const isLoggedIn = await checkAuthUser();
 
-    if(isLoggedIn){
+    if(isLoggedIn && user.isEmailVerified){
       form.reset();
       navigate('/Sindalah/');
+    }
+    else if(isLoggedIn){
+      form.reset();
+      navigate('/Sindalah/verify/email')
     }
     else{
       return  toast({
@@ -145,7 +157,7 @@ const SignUpForm = () => {
           <Button type="submit" className="shad-button_primary">
             {isCreatingAccount || isUserLoading || isSigningIn?
             (<div className="flex-center gap-2">
-              <Loader/> Loading...
+              <Loader/> Signing up...
             </div>):
             ("Sign Up")}
           </Button>

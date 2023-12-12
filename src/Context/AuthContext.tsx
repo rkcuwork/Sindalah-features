@@ -1,7 +1,11 @@
 import { getCurrentUser } from '@/lib/Appwrite/api';
 import { IContextType, IUser } from '@/types';
 import {createContext, useContext, useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
+import {  useLocation, useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+
+
+
 
 export const INITIAL_USER = {
     id:'',
@@ -10,12 +14,15 @@ export const INITIAL_USER = {
     email:'',
     imageUrl:'',
     bio:'',
+    isEmailVerified:false,
+    isPhoneVerified: false,
 }
 
 const INITIAL_STATE = {
     user:INITIAL_USER,
     isLoading: false,
     isAuthenticated: false,
+
     setUser: () => {},
     setIsAuthenticated: () => {},
     checkAuthUser: async () => false as boolean,
@@ -24,18 +31,25 @@ const INITIAL_STATE = {
 const AuthContext = createContext<IContextType>(INITIAL_STATE);
 
 const AuthProvider = ({children}:{children: React.ReactNode}) => {
+
     const [user, setUser] = useState<IUser>(INITIAL_USER);
     const [isLoading, setisLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+    const [cookie,setCookie] = useCookies();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const checkAuthUser = async () =>{
+      console.log("checkAuthUser called");
       setisLoading(true);
       try {
         const currentAccount = await getCurrentUser();
-
+        console.log('currentAccount = >', currentAccount)
+        
         if(currentAccount){
+          console.log("setting user")
+          localStorage.setItem('user', JSON.stringify(currentAccount));
+          setCookie('emailVerification', currentAccount.emailVerification, { path: '/'});
           setUser({
             id: currentAccount.$id,
             name: currentAccount.name,
@@ -43,10 +57,16 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
             email: currentAccount.email,
             imageUrl: currentAccount.imageUrl,
             bio: currentAccount.bio,
+            isEmailVerified:  currentAccount.emailVerification,
+            isPhoneVerified: currentAccount.phoneVerification,
           });
 
+          if(currentAccount.emailVerification){
+            navigate('/Sindalah/')
+          }
           setIsAuthenticated(true);
           setisLoading(false);
+          // console.log("user in authcontext -> ",user);
           return true;
         }
         return false;
@@ -60,9 +80,14 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
       }
     };
 
+    // useEffect(() => {
+    //   console.log("user changed = ",user)
+    //   localStorage.setItem('user', JSON.stringify(user));
+    // }, [user]);
 
     useEffect(() => {
       const cookieFallback = localStorage.getItem("cookieFallback");
+      
       if (
         cookieFallback === "[]" ||
         cookieFallback === null ||
@@ -70,9 +95,14 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
       ) {
         navigate("/Sindalah/sign-in");
       }
+      else if(!cookie.emailVerification && location.pathname !== "/Sindalah/verify-email"){
+        navigate("/Sindalah/verify/email");
+      }
   
       // checkAuthUser();
     }, []);
+
+    
 
     const value = {
         user,

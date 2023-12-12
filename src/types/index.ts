@@ -48,6 +48,8 @@ export type INavLink = {
     email: string;
     imageUrl: string;
     bio: string;
+    isEmailVerified:boolean;
+    isPhoneVerified:boolean;
   };
   
   export type INewUser = {
