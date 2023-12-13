@@ -1,18 +1,18 @@
-import { useEffect,  } from "react";
+// import { useEffect,  } from "react";
 import { useNavigate } from "react-router-dom";
 import { tickImageUrl } from "./Images";
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 
 const AlreadyVerifiedEmail = () => {
     const navigate = useNavigate();
-    const [cookie] = useCookies();
-    useEffect(()=> {
-        const emailVerified = cookie.emailVerification;
-        if(!emailVerified){
-            navigate("/Sindalah/verify/email");
-        }
+    // const [cookie] = useCookies();
+    // useEffect(()=> {
+    //     const emailVerified = cookie.emailVerification;
+    //     if(!emailVerified){
+    //         navigate("/Sindalah/verify/email");
+    //     }
 
-    },[])
+    // },[])
 
     const handleMainPageBtnClick = () =>{
         navigate('/Sindalah/')

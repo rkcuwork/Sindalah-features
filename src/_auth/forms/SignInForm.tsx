@@ -9,9 +9,8 @@ import { SignInValidation, } from "@/lib/Validations";
 import Loader from "@/components/Shared/Loader";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast"
-import {  useSignInAccount } from "@/lib/React-Query/QueriesAndMutatiions";
+import {  useIsEmailVerified, useSignInAccount } from "@/lib/React-Query/QueriesAndMutatiions";
 import { useUserContext } from "@/Context/AuthContext";
-import { isEmailVerified } from "@/lib/Appwrite/api";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 
@@ -23,7 +22,7 @@ const SignInForm = () => {
   const { toast } = useToast();
   // const isloading = false;
   const navigate = useNavigate();
-  const [cookies,setCookie] = useCookies();
+  const [cookies] = useCookies();
   
   useEffect(()=>{
     if(cookies.emailVerification && localStorage.getItem("user")){
@@ -31,11 +30,12 @@ const SignInForm = () => {
     }
   },[])
 
-  const {user,checkAuthUser, isLoading:isUserLoading} = useUserContext();
+  const {checkAuthUser, isLoading:isUserLoading} = useUserContext();
   
 
   
   const {mutateAsync: signInAccount, isPending:isSigningIn} = useSignInAccount();
+  const {mutateAsync: isEmailVerified, isPending:isEmailVerifying} = useIsEmailVerified();
   // console.log(isSigningIn);
     // 1. Define your form.
   const form = useForm<z.infer<typeof SignInValidation>>({
@@ -62,12 +62,12 @@ const SignInForm = () => {
 
     const isLoggedIn = await checkAuthUser();
     const verifiedEmail = await isEmailVerified();
-    console.log("user = ",user);
+    // console.log("cookie = ",cookies.emailVerification);
 
     if(isLoggedIn && verifiedEmail){
       form.reset();
-      setCookie('emailVerification', true, { path: '/'});
-      navigate('/Sindalah/');
+      // setCookie('emailVerification', true, { path: '/'});
+      return navigate('/Sindalah/');
     }
     else if(isLoggedIn){
       form.reset();
@@ -122,7 +122,7 @@ const SignInForm = () => {
             )}
           />
           <Button type="submit" className="shad-button_primary">
-            {isSigningIn || isUserLoading?
+            {isSigningIn || isUserLoading || isEmailVerifying?
             (<div className="flex-center gap-2">
               <Loader/> Signing in...
             </div>):

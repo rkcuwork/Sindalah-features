@@ -6,12 +6,12 @@ import RootLayout from './_root/RootLayout'
 import './globals.css'
 import {Routes, Route, } from 'react-router-dom'
 import { Toaster } from "@/components/ui/toaster"
-import EmailVerification from './components/MyPages/Verifications/EmailVerification'
-import PhoneVerification from './components/MyPages/Verifications/PhoneVerification'
-import EmailVerificationLinkSent from './components/MyPages/Verifications/EmailVerificationLinkSent'
-import AlreadyVerifiedEmail from './components/MyPages/Verifications/AlreadyVerifiedEmail'
-import VerifyEmail from './components/MyPages/Verifications/VerifyEmail'
-import FailedEmailVerification from './components/MyPages/Verifications/FailedEmailVerification'
+import EmailVerification from './components/MyPages/Verifications/EmailVerification/EmailVerification'
+import PhoneVerification from './components/MyPages/Verifications/PhoneVerification/PhoneVerification'
+import EmailVerificationLinkSent from './components/MyPages/Verifications/EmailVerification/EmailVerificationLinkSent'
+import AlreadyVerifiedEmail from './components/MyPages/Verifications/EmailVerification/AlreadyVerifiedEmail'
+import VerifyEmail from './components/MyPages/Verifications/EmailVerification/VerifyEmail'
+import FailedEmailVerification from './components/MyPages/Verifications/EmailVerification/FailedEmailVerification'
 
 
 

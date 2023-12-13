@@ -4,7 +4,7 @@ import {
     // useQueryClient,
     // useInfiniteQuery,
 } from '@tanstack/react-query';
-import { createUserAccount, signInAccount, sendEmailVerificationLink } from '../Appwrite/api';
+import { createUserAccount, signInAccount, sendEmailVerificationLink, isEmailVerified } from '../Appwrite/api';
 import { INewUser } from '@/types';
 
 export const useCreateUserAccount= () =>{
@@ -25,5 +25,12 @@ export const useSignInAccount= () =>{
 export const useSendVerificationEmailLink = () =>{
     return useMutation({
         mutationFn:() => sendEmailVerificationLink()
+    })
+}
+
+
+export const useIsEmailVerified = () =>{
+    return useMutation({
+        mutationFn:() => isEmailVerified()
     })
 }

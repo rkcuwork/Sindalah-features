@@ -8,15 +8,15 @@ const EmailVerificationLinkSent = () => {
     const [cookie] = useCookies();
     useEffect(()=> {
         const emailSent = localStorage.getItem("VerificationEmailSent");
-        const user = localStorage.getItem("user");
-        if(!user){
-            return navigate("/Sindalah/sign-in");
-        }
+        // const user = localStorage.getItem("user");
+        // if(!user){
+        //     return navigate("/Sindalah/sign-in");
+        // }
         if(!emailSent){
-            navigate("/Sindalah/verify/email");
+            return navigate("/Sindalah/verify/email");
         }
         if(cookie.emailVerification){
-            navigate("/Sindalah/verify/email/done");
+            return navigate("/Sindalah/verify/email/done");
         }
     },[])
 

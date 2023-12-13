@@ -11,14 +11,14 @@ const VerifyEmail = () => {
   const [isEmailVerified,setIsEmailVerified] = useState(false);
 
   useEffect(() => {
-    const storedValue = localStorage.getItem('user');
-    
+    const emailSent = localStorage.getItem('VerificationEmailSent')
+   
     const fetchData = async () => {
-      if (!storedValue) {
-        navigate("/Sindalah/Sign-in");
+      if (!emailSent) {
+        return navigate("/Sindalah/verify/email");
       }
       if (cookies.emailVerification) {
-        navigate("/Sindalah/verify/email/done");
+        return navigate("/Sindalah/verify/email/done");
       }
 
       const urlParams = new URLSearchParams(window.location.search);
@@ -32,8 +32,10 @@ const VerifyEmail = () => {
               setCookie('emailVerification', true, { path: '/' });
               // setCookie('EmailVerificationhttponly', true, { path: '/', httpOnly: true });
               setIsEmailVerified(true);
+              localStorage.removeItem("VerificationEmailSent");
           }
           else{
+            
             navigate("/Sindalah/verify/email/fail")
           }
         } catch (error) {
@@ -41,7 +43,7 @@ const VerifyEmail = () => {
         }
       }
       else{
-        navigate("/Sindalah/verify/email/fail")
+        return navigate("/Sindalah/verify/email/fail")
       }
     };
 

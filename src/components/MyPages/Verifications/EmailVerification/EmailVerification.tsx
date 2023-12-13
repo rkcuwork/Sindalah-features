@@ -15,17 +15,17 @@ const EmailVerification =  () => {
   const [cookies] = useCookies();
   
   useEffect(()=>{
+    if(cookies.emailVerification){
+      return navigate("/Sindalah/verify/email/done");
+    }
     const storedValue = localStorage.getItem('user');
     if(storedValue){
       const email = JSON.parse(storedValue).email;
       setUserEmail(email);
     }
-    else if (!storedValue){
-      navigate("/Sindalah/Sign-in");
-    }
-    if(cookies.emailVerification){
-      navigate("/Sindalah/verify/email/done");
-    }
+    // else if (!storedValue){
+    //   navigate("/Sindalah/Sign-in");
+    // }
   },[]);
   
 

@@ -29,7 +29,7 @@ const SignUpForm = () => {
   },[])
   const navigate = useNavigate();
 
-  const {user,checkAuthUser, isLoading:isUserLoading} = useUserContext();
+  const {checkAuthUser, isLoading:isUserLoading} = useUserContext();
   // console.log(isUserLoading);
   
   const {mutateAsync: createUserAccount, isPending: isCreatingAccount} = useCreateUserAccount();
@@ -71,11 +71,7 @@ const SignUpForm = () => {
 
     const isLoggedIn = await checkAuthUser();
 
-    if(isLoggedIn && user.isEmailVerified){
-      form.reset();
-      navigate('/Sindalah/');
-    }
-    else if(isLoggedIn){
+    if(isLoggedIn){
       form.reset();
       navigate('/Sindalah/verify/email')
     }

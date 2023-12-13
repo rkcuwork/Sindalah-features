@@ -50,6 +50,7 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
           console.log("setting user")
           localStorage.setItem('user', JSON.stringify(currentAccount));
           setCookie('emailVerification', currentAccount.emailVerification, { path: '/'});
+          // console.log("cookie auth = ",cookie.emailVerification);
           setUser({
             id: currentAccount.$id,
             name: currentAccount.name,
