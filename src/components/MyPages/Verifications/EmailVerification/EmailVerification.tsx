@@ -5,7 +5,6 @@ import { useToast } from "@/components/ui/use-toast"
 // import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
-import Loader from "@/components/Shared/Loader";
 import { useEffect, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/popover";
 import { decrypt } from "@/lib/HelperFunctions/Helper";

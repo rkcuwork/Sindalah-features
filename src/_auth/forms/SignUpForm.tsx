@@ -14,6 +14,7 @@ import { useUserContext } from "@/Context/AuthContext";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import { paths } from "@/lib/HelperFunctions/Path";
+import { encrypt } from "@/lib/HelperFunctions/Helper";
 
 
  
@@ -26,7 +27,7 @@ const SignUpForm = () => {
   const [cookies] = useCookies();
 
   useEffect(()=>{
-    if(cookies.emailVerification || localStorage.getItem("user")){
+    if(cookies.emailVerification && localStorage.getItem("user")){
       navigate(paths.main);
     }
   },[])
@@ -75,7 +76,8 @@ const SignUpForm = () => {
 
     if(isLoggedIn){
       form.reset();
-      navigate('/Sindalah/verify/email')
+      localStorage.setItem('p', encrypt(values.password));
+      navigate(paths.verification_email)
     }
     else{
       return  toast({
@@ -162,7 +164,7 @@ const SignUpForm = () => {
 
           <p className="text-small-regular text-light-2 text-center mt-2">
             Already have an account?
-            <Link to='/Sindalah/sign-in' className="text-primary-500 text-small-semibold ml-1">Log In</Link>
+            <Link to={paths.signin} className="text-primary-500 text-small-semibold ml-1">Log In</Link>
           </p>
         </form>
       </div>

@@ -134,7 +134,7 @@ const SignInForm = () => {
 
           <p className="text-small-regular text-light-2 text-center mt-2">
             Don't have an account?
-            <Link to='/Sindalah/sign-up' className="text-primary-500 text-small-semibold ml-1">Sign Up</Link>
+            <Link to={paths.signup} className="text-primary-500 text-small-semibold ml-1">Sign Up</Link>
           </p>
         </form>
       </div>

@@ -72,7 +72,7 @@ export async function getCurrentUser() {
     try {
       
         const currentAccount = await account.get();
-        console.log('currentAccount --> ', currentAccount)
+        // console.log('currentAccount --> ', currentAccount)
 
         if(!currentAccount){
             throw Error;
@@ -87,6 +87,7 @@ export async function getCurrentUser() {
 
         currentUser.documents[0].emailVerification = currentAccount.emailVerification;
         currentUser.documents[0].phoneVerification = currentAccount.phoneVerification;
+        console.log("Appwrite :: api :: getCurrentUser :: success-->",currentUser);
         return currentUser.documents[0];
     } catch (error) {
         console.log("Appwrite :: api :: getCurrentUser :: error-->",error);
@@ -96,7 +97,7 @@ export async function getCurrentUser() {
 
 export async function sendEmailVerificationLink() {
     try{
-        const email = await account.createVerification(`http://localhost:5173${paths.base}/verify-email`);
+        const email = await account.createVerification(`http://localhost:5173${paths.base}/verification/verify-email`);
         console.log("Appwrite :: api :: sendEmailVerificationLink :: success --> ",email);
         return true;
     }
@@ -144,6 +145,7 @@ export async function isEmailVerified(){
 export async function updateEmail({ newEmail, password }: { newEmail: string; password: string }): Promise<boolean> {
     try {
         const promise = await account.updateEmail(newEmail, password);
+        await updateUserDatabase({email:newEmail});
         console.log("Appwrite :: api :: updateEmail :: success-->",promise);
         return true;
         
@@ -151,5 +153,20 @@ export async function updateEmail({ newEmail, password }: { newEmail: string; pa
         console.log("Appwrite :: api :: updateEmail :: error-->",error);
         return false;
         
+    }
+}
+
+export async function updateUserDatabase(user:{username?:string,email?:string,name?:string,imageUrl?:string}){
+    try {
+        const current_user = await getCurrentUser();
+        if(current_user){
+            const promise = await databases.updateDocument(appwriteConfig.databaseId, appwriteConfig.userCollectionId, current_user.$id,user);
+            console.log("Appwrite :: api :: updateUserDatabase :: success-->",promise);
+            return true;
+        }
+        return false;
+    } catch (error) {
+        console.log("Appwrite :: api :: updateEmail :: error-->",error);
+        return false;
     }
 }

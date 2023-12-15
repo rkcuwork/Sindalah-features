@@ -63,6 +63,8 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
             isPhoneVerified: currentAccount.phoneVerification,
           });
 
+          console.log({currentAccount});
+
           if(currentAccount.emailVerification){
             navigate(paths.main)
           }
@@ -97,7 +99,7 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
       ) {
         navigate(paths.signin);
       }
-      else if(!cookie.emailVerification && location.pathname !== "/Sindalah/verify-email"){
+      else if(!cookie.emailVerification && location.pathname !== paths.verification_verifyemail){
         navigate(paths.verification_email);
       }
   

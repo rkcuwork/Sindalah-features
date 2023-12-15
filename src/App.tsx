@@ -40,7 +40,7 @@ function App() {
 
 
         {/* Private Routes */}
-        <Route path={paths.base} element={<RootLayout/>}>
+        <Route path={paths.main} element={<RootLayout/>}>
           <Route index element={<Home/>}/>
         </Route>
 

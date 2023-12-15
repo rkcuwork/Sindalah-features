@@ -1,8 +1,13 @@
+import Spinner from "@/components/MyConponents/Spinner"
+import Loader from "@/components/Shared/Loader"
 
 
 const RootLayout = () => {
   return (
-    <div>RootLayout</div>
+    <div className="flex-center gap-2">
+      <Spinner/>
+      <Loader/>
+    </div>
   )
 }
 
