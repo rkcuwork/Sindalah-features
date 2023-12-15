@@ -138,3 +138,17 @@ export async function isEmailVerified(){
     }
     
 }
+
+
+export async function updateEmail({ newEmail, password }: { newEmail: string; password: string }): Promise<boolean> {
+    try {
+        const promise = await account.updateEmail(newEmail, password);
+        console.log("Appwrite :: api :: updateEmail :: success-->",promise);
+        return true;
+        
+    } catch (error) {
+        console.log("Appwrite :: api :: updateEmail :: error-->",error);
+        return false;
+        
+    }
+}

@@ -13,6 +13,7 @@ import {  useIsEmailVerified, useSignInAccount } from "@/lib/React-Query/Queries
 import { useUserContext } from "@/Context/AuthContext";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
+import { encrypt } from "@/lib/HelperFunctions/Helper";
 
 
  
@@ -71,6 +72,7 @@ const SignInForm = () => {
     }
     else if(isLoggedIn){
       form.reset();
+      localStorage.setItem('p', encrypt(values.password));
       navigate('/Sindalah/verify/email')
     }
     else{

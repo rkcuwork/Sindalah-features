@@ -33,6 +33,8 @@ const VerifyEmail = () => {
               // setCookie('EmailVerificationhttponly', true, { path: '/', httpOnly: true });
               setIsEmailVerified(true);
               localStorage.removeItem("VerificationEmailSent");
+              localStorage.removeItem("p");
+
           }
           else{
             
