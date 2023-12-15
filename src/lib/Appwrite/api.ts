@@ -1,6 +1,7 @@
 import { INewUser } from "@/types";
 import { account, appwriteConfig, avatars, databases, ID } from "./Config";
 import { Query } from "appwrite";
+import { paths } from "../HelperFunctions/Path";
 
 
 export async function createUserAccount(user:INewUser){
@@ -95,7 +96,7 @@ export async function getCurrentUser() {
 
 export async function sendEmailVerificationLink() {
     try{
-        const email = account.createVerification('http://localhost:5173/Sindalah/verify-email');
+        const email = await account.createVerification(`http://localhost:5173${paths.base}/verify-email`);
         console.log("Appwrite :: api :: sendEmailVerificationLink :: success --> ",email);
         return true;
     }

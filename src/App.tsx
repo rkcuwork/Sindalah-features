@@ -12,33 +12,35 @@ import EmailVerificationLinkSent from './components/MyPages/Verifications/EmailV
 import AlreadyVerifiedEmail from './components/MyPages/Verifications/EmailVerification/AlreadyVerifiedEmail'
 import VerifyEmail from './components/MyPages/Verifications/EmailVerification/VerifyEmail'
 import FailedEmailVerification from './components/MyPages/Verifications/EmailVerification/FailedEmailVerification'
+import { paths } from './lib/HelperFunctions/Path'
 
 
 
 function App() {
+
   return (
     <main className='flex h-screen'>
       <Routes>
         {/* Public Routes */}
         <Route  element={<AuthLayout/>}>
-          <Route path='Sindalah/sign-in' element={<SignInForm/>}/>
-          <Route path='Sindalah/sign-up' element={<SignUpForm/>}/>
+          <Route path={paths.signin} element={<SignInForm/>}/>
+          <Route path={paths.signup} element={<SignUpForm/>}/>
         </Route>
 
         {/* Verification Routes */}
-        <Route path='Sindalah/verify'>
-          <Route path='email' element={<EmailVerification/>}>
+        <Route path={paths.verification}>
+          <Route path={paths.verification_email} element={<EmailVerification/>}>
           </Route>
-          <Route path='phone' element={<PhoneVerification/>}></Route>
+          <Route path={paths.verification_phone} element={<PhoneVerification/>}></Route>
         </Route>
-        <Route path='Sindalah/verify/email/sent' element={<EmailVerificationLinkSent/>}></Route>
-        <Route path='Sindalah/verify/email/fail' element={<FailedEmailVerification/>}></Route>
-        <Route path='Sindalah/verify/email/done' element={<AlreadyVerifiedEmail/>}></Route>
-        <Route path='Sindalah/verify-email' element={<VerifyEmail/>}></Route>
+        <Route path={paths.verification_email_sent} element={<EmailVerificationLinkSent/>}></Route>
+        <Route path={paths.verification_email_fail} element={<FailedEmailVerification/>}></Route>
+        <Route path={paths.verification_email_done} element={<AlreadyVerifiedEmail/>}></Route>
+        <Route path={paths.verification_verifyemail} element={<VerifyEmail/>}></Route>
 
 
         {/* Private Routes */}
-        <Route path='Sindalah' element={<RootLayout/>}>
+        <Route path={paths.base} element={<RootLayout/>}>
           <Route index element={<Home/>}/>
         </Route>
 

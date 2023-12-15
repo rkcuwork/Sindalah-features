@@ -3,6 +3,7 @@ import { IContextType, IUser } from '@/types';
 import {createContext, useContext, useState, useEffect} from 'react';
 import {  useLocation, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { paths } from '@/lib/HelperFunctions/Path';
 
 
 
@@ -63,7 +64,7 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
           });
 
           if(currentAccount.emailVerification){
-            navigate('/Sindalah/')
+            navigate(paths.main)
           }
           setIsAuthenticated(true);
           setisLoading(false);
@@ -94,10 +95,10 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
         cookieFallback === null ||
         cookieFallback === undefined
       ) {
-        navigate("/Sindalah/sign-in");
+        navigate(paths.signin);
       }
       else if(!cookie.emailVerification && location.pathname !== "/Sindalah/verify-email"){
-        navigate("/Sindalah/verify/email");
+        navigate(paths.verification_email);
       }
   
       // checkAuthUser();

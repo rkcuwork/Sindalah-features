@@ -1,3 +1,4 @@
+import { paths } from '@/lib/HelperFunctions/Path';
 import {Outlet, Navigate} from 'react-router-dom';
 
 const AuthLayout = () => {
@@ -6,7 +7,7 @@ const AuthLayout = () => {
   return (
     <>
         {isAuthenticated? 
-        (<Navigate to="/sindalah" />) :
+        (<Navigate to={paths.main} />) :
         (
             <>
                 <section className='flex flex-1 justify-center items-center flex-col py-10'>

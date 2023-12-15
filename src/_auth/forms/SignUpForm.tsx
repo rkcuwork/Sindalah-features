@@ -13,6 +13,7 @@ import { useCreateUserAccount, useSignInAccount } from "@/lib/React-Query/Querie
 import { useUserContext } from "@/Context/AuthContext";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
+import { paths } from "@/lib/HelperFunctions/Path";
 
 
  
@@ -21,13 +22,14 @@ import { useEffect } from "react";
 const SignUpForm = () => {
   const { toast } = useToast();
   // const isloading = false;
+  const navigate = useNavigate();
   const [cookies] = useCookies();
+
   useEffect(()=>{
     if(cookies.emailVerification || localStorage.getItem("user")){
-      navigate("/Sindalah/");
+      navigate(paths.main);
     }
   },[])
-  const navigate = useNavigate();
 
   const {checkAuthUser, isLoading:isUserLoading} = useUserContext();
   // console.log(isUserLoading);

@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { tickImageUrl } from "./Images";
 import Spinner from "@/components/MyConponents/Spinner";
+import { paths } from "@/lib/HelperFunctions/Path";
 
 const VerifyEmail = () => {
   const [cookies, setCookie] = useCookies();
@@ -15,10 +16,10 @@ const VerifyEmail = () => {
    
     const fetchData = async () => {
       if (!emailSent) {
-        return navigate("/Sindalah/verify/email");
+        return navigate(paths.verification_email);
       }
       if (cookies.emailVerification) {
-        return navigate("/Sindalah/verify/email/done");
+        return navigate(paths.verification_email_done);
       }
 
       const urlParams = new URLSearchParams(window.location.search);
@@ -38,14 +39,14 @@ const VerifyEmail = () => {
           }
           else{
             
-            navigate("/Sindalah/verify/email/fail")
+            navigate(paths.verification_email_fail)
           }
         } catch (error) {
           console.log("components :: MyPages :: Verification :: verifyEmail :: error --> ", error);
         }
       }
       else{
-        return navigate("/Sindalah/verify/email/fail")
+        return navigate(paths.verification_email_fail)
       }
     };
 
@@ -53,7 +54,7 @@ const VerifyEmail = () => {
   }, []);
 
     const handleMainPageBtnClick = () =>{
-        navigate('/Sindalah/')
+        navigate(paths.main)
     }
 
   return (

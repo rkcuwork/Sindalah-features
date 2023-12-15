@@ -2,21 +2,19 @@ import { useEffect,  } from "react";
 import { useNavigate } from "react-router-dom";
 import { emailImageUrl } from "./Images";
 import { useCookies } from "react-cookie";
+import { paths } from "@/lib/HelperFunctions/Path";
 
 const EmailVerificationLinkSent = () => {
     const navigate = useNavigate();
     const [cookie] = useCookies();
     useEffect(()=> {
         const emailSent = localStorage.getItem("VerificationEmailSent");
-        // const user = localStorage.getItem("user");
-        // if(!user){
-        //     return navigate("/Sindalah/sign-in");
-        // }
+      
         if(!emailSent){
-            return navigate("/Sindalah/verify/email");
+            return navigate(paths.verification_email);
         }
         if(cookie.emailVerification){
-            return navigate("/Sindalah/verify/email/done");
+            return navigate(paths.verification_email_done);
         }
     },[])
 

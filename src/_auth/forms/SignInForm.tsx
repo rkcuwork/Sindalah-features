@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { paths } from "@/lib/HelperFunctions/Path";
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -27,7 +28,7 @@ const SignInForm = () => {
   
   useEffect(()=>{
     if(cookies.emailVerification && localStorage.getItem("user")){
-      navigate("/Sindalah/");
+      navigate(paths.main);
     }
   },[])
 
@@ -68,12 +69,12 @@ const SignInForm = () => {
     if(isLoggedIn && verifiedEmail){
       form.reset();
       // setCookie('emailVerification', true, { path: '/'});
-      return navigate('/Sindalah/');
+      return navigate(paths.main);
     }
     else if(isLoggedIn){
       form.reset();
       localStorage.setItem('p', encrypt(values.password));
-      navigate('/Sindalah/verify/email')
+      navigate(paths.verification_email)
     }
     else{
       return  toast({

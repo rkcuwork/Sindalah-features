@@ -1,6 +1,7 @@
 // import { useEffect,  } from "react";
 import { useNavigate } from "react-router-dom";
 import { tickImageUrl } from "./Images";
+import { paths } from "@/lib/HelperFunctions/Path";
 // import { useCookies } from "react-cookie";
 
 const AlreadyVerifiedEmail = () => {
@@ -15,7 +16,7 @@ const AlreadyVerifiedEmail = () => {
     // },[])
 
     const handleMainPageBtnClick = () =>{
-        navigate('/Sindalah/')
+        navigate(paths.main)
     }
 
     return (

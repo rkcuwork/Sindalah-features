@@ -9,6 +9,7 @@ import Loader from "@/components/Shared/Loader";
 import { useEffect, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/popover";
 import { decrypt } from "@/lib/HelperFunctions/Helper";
+import { paths } from "@/lib/HelperFunctions/Path";
 
 
 
@@ -27,16 +28,14 @@ const EmailVerification =  () => {
   
   useEffect(()=>{
     if(cookies.emailVerification){
-      return navigate("/Sindalah/verify/email/done");
+      return navigate(paths.verification_email_done);
     }
     const storedValue = localStorage.getItem('user');
     if(storedValue){
       const email = JSON.parse(storedValue).email;
       setUserEmail(email);
     }
-    // else if (!storedValue){
-    //   navigate("/Sindalah/Sign-in");
-    // }
+ 
   },[]);
   
 
@@ -50,7 +49,7 @@ const EmailVerification =  () => {
 
       if(mailSent){
         localStorage.setItem("VerificationEmailSent","true");
-        navigate("/Sindalah/verify/email/sent");
+        navigate(paths.verification_email_sent);
       }
       else{
         return  toast({
@@ -109,7 +108,7 @@ const EmailVerification =  () => {
         >
           {isSendingEmail?
             (<div className="flex-center gap-2">
-              <Loader/> Sending...
+              Sending...
             </div>):
             ("Send Link")}
         </button>

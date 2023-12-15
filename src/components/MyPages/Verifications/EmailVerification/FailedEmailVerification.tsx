@@ -2,6 +2,7 @@ import { useEffect,  } from "react";
 import { useNavigate } from "react-router-dom";
 import { crossImageUrl } from "./Images";
 import { useCookies } from "react-cookie";
+import { paths } from "@/lib/HelperFunctions/Path";
 
 const FailedEmailVerification = () => {
     const navigate = useNavigate();
@@ -9,13 +10,13 @@ const FailedEmailVerification = () => {
     useEffect(()=> {
         const emailVerified = cookie.emailVerification;
         if(emailVerified){
-            navigate("/Sindalah/verify/email/done");
+            navigate(paths.verification_email_done);
         }
 
     },[])
 
     const handleMainPageBtnClick = () =>{
-        navigate('/Sindalah/verify/email')
+        navigate(paths.verification_email)
     }
 
     return (
