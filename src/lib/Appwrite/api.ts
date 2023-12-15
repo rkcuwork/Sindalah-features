@@ -97,7 +97,7 @@ export async function getCurrentUser() {
 
 export async function sendEmailVerificationLink() {
     try{
-        const email = await account.createVerification(`http://localhost:5173${paths.base}/verification/verify-email`);
+        const email = await account.createVerification(`https://rkcuwork.github.io${paths.base}/verification/verify-email`);
         console.log("Appwrite :: api :: sendEmailVerificationLink :: success --> ",email);
         return true;
     }
