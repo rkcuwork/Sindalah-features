@@ -66,7 +66,6 @@ const EmailVerification =  () => {
         const en_password = localStorage.getItem('p');
         if(en_password){
           const password = decrypt(en_password);
-          console.log({password});
           if(await updateEmail({newEmail,password})){
             setUserEmail(newEmail);
             const str_user = localStorage.getItem('user');
@@ -108,7 +107,7 @@ const EmailVerification =  () => {
         >
           {isSendingEmail?
             (<div className="flex-center gap-2">
-              <Spinner h={5} w={5}/> Sending...
+              <Spinner h={4} w={4}/> Sending...
             </div>):
             ("Send Link")}
         </button>
@@ -145,8 +144,8 @@ const EmailVerification =  () => {
                 className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
               >
                 {isUpdatingEmail? 
-                (<div className="flex-center gap-2">
-                <Spinner h={5} w={5}/> Updating...
+                (<div className="flex-center gap-4">
+                <Spinner h={4} w={4}/> Updating...
               </div>):
               ("Update Email")}
                 
