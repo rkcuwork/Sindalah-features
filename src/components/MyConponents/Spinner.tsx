@@ -3,11 +3,13 @@ import React from 'react';
 const Spinner: React.FC<{
   w?: number;
   h?: number;
-}> = ({ w=16,h=16 }) => {
+  color?: string
+}> = ({ w=16,h=16,color="white" }) => {
+  console.log(w,h);
   return (
-    <div className="flex items-center justify-center">
-      <img src="assets/icons/loader.svg" alt="loader" className={`w-${w} h-${h} rounded-full mb-4`} />
-    </div>
+    // <div className="flex justify-center items-center h-screen">
+      <div className={`animate-spin spinner border-t-2 border-${color} border-solid rounded-full w-${w} h-${h}`}></div>
+    // </div>
   );
 };
 

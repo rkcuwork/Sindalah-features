@@ -1,5 +1,5 @@
 import Spinner from "@/components/MyConponents/Spinner"
-import Loader from "@/components/Shared/Loader"
+import Loader from "@/components/Shared/Loader";
 
 
 const RootLayout = () => {
@@ -7,6 +7,9 @@ const RootLayout = () => {
     <div className="flex-center gap-2">
       <Spinner/>
       <Loader/>
+      
+
+
     </div>
   )
 }

@@ -63,7 +63,7 @@ const VerifyEmail = () => {
             
             {isEmailVerified? <div><img src={tickImageUrl} alt="Email Icon" className="w-16 h-16 rounded-full mb-4 " /></div> :
             <div >
-                <Spinner w={16} h={16}/>
+                <Spinner w={16} h={16} color="blue-600"/>
             </div> }
             
             <h1 className={`text-4xl font-bold mb-4 `}>

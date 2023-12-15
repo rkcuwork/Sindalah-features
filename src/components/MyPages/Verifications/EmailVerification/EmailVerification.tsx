@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/popover";
 import { decrypt } from "@/lib/HelperFunctions/Helper";
 import { paths } from "@/lib/HelperFunctions/Path";
+import Spinner from "@/components/MyConponents/Spinner";
 
 
 
@@ -107,7 +108,7 @@ const EmailVerification =  () => {
         >
           {isSendingEmail?
             (<div className="flex-center gap-2">
-              Sending...
+              <Spinner h={5} w={5}/> Sending...
             </div>):
             ("Send Link")}
         </button>
@@ -144,7 +145,10 @@ const EmailVerification =  () => {
                 className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
               >
                 {isUpdatingEmail? 
-                ("Updating..."):('Update Email')}
+                (<div className="flex-center gap-2">
+                <Spinner h={5} w={5}/> Updating...
+              </div>):
+              ("Update Email")}
                 
               </button>
             </div>
