@@ -120,10 +120,13 @@ const SignInForm = () => {
                 <FormControl>
                     <Input type='password' className="shad-input" placeholder="Enter Password" {...field} />
                 </FormControl>
+                  <Link to={paths.forgotpassword} className="text-primary-500 text-small hover:underline">Forgot Password?</Link>
                 <FormMessage />
                 </FormItem>
             )}
           />
+          
+
           <Button type="submit" className="shad-button_primary">
             {isSigningIn || isUserLoading || isEmailVerifying?
             (<div className="flex-center gap-2">
@@ -134,7 +137,7 @@ const SignInForm = () => {
 
           <p className="text-small-regular text-light-2 text-center mt-2">
             Don't have an account?
-            <Link to={paths.signup} className="text-primary-500 text-small-semibold ml-1">Sign Up</Link>
+            <Link to={paths.signup} className="text-primary-500 text-small-semibold ml-1 hover:underline">Sign Up</Link>
           </p>
         </form>
       </div>

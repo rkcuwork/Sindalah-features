@@ -1,5 +1,5 @@
 import { INewUser } from "@/types";
-import { account, appwriteConfig, avatars, databases, ID } from "./Config";
+import { account, appwriteConfig, avatars, databases, handleException, ID } from "./Config";
 import { Query } from "appwrite";
 import { paths } from "../HelperFunctions/Path";
 
@@ -97,7 +97,7 @@ export async function getCurrentUser() {
 
 export async function sendEmailVerificationLink() {
     try{
-        const email = await account.createVerification(`https://rkcuwork.github.io${paths.base}/verification/verify-email`);
+        const email = await account.createVerification(`${paths.start_url}${paths.base}/verification/verify-email`);
         console.log("Appwrite :: api :: sendEmailVerificationLink :: success --> ",email);
         return true;
     }
@@ -168,5 +168,31 @@ export async function updateUserDatabase(user:{username?:string,email?:string,na
     } catch (error) {
         console.log("Appwrite :: api :: updateEmail :: error-->",error);
         return false;
+    }
+}
+
+export async function sendForgotPasswordLink(email:string){
+    const result = {success:true,
+    message:"Reset password link sent successfully."}
+    try {
+        const promise = await account.createRecovery(email,`${paths.start_url}${paths.base}/forgot-password/reset`);
+        console.log("Appwrite :: api :: sendForgotPasswordLink :: success-->",promise);
+        return result;
+    } catch (error) {
+        console.log("Appwrite :: api :: sendForgotPasswordLink :: error-->",error);
+        return handleException(error);
+    }
+}
+
+export async function updatePassword({userId,secret,newPassword} : {userId:string,secret:string,newPassword:string}){
+    const result = {success:true,
+        message:"Pawword updated successfully."}
+    try {
+        const promise = await account.updateRecovery(userId, secret, newPassword, newPassword);
+        console.log("Appwrite :: api :: updatePassword :: success-->",promise);
+        return result;
+    } catch (error) {
+        console.log("Appwrite :: api :: updatePassword :: error-->",error);
+        return handleException(error);
     }
 }

@@ -1,4 +1,5 @@
-import {Client, Account, Databases, Storage, Avatars, ID} from 'appwrite';
+import {Client, Account, Databases, Storage, Avatars, ID, AppwriteException} from 'appwrite';
+
 
 
 export const appwriteConfig = {
@@ -22,3 +23,13 @@ export const databases = new Databases(client);
 export const storage = new Storage(client);
 export const avatars = new Avatars(client);
 export {ID}
+
+export const handleException=(error:unknown):({success:boolean;message:string})=>{
+    const result = {success:false,message:"Something went wrong. Please try again."};
+
+    if(error instanceof AppwriteException){
+        result.message = error.message;
+    }
+
+    return result;
+}

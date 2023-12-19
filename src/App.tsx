@@ -13,6 +13,10 @@ import AlreadyVerifiedEmail from './components/MyPages/Verifications/EmailVerifi
 import VerifyEmail from './components/MyPages/Verifications/EmailVerification/VerifyEmail'
 import FailedEmailVerification from './components/MyPages/Verifications/EmailVerification/FailedEmailVerification'
 import { paths } from './lib/HelperFunctions/Path'
+import ForgotPassword from './components/MyPages/ForgotPassword/ForgotPassword'
+import ForgotPasswordReset from './components/MyPages/ForgotPassword/ForgotPasswordReset'
+import LinkSentForgotPassword from './components/MyPages/ForgotPassword/LinkSentForgotPassword'
+import PasswordUpdated from './components/MyPages/ForgotPassword/PasswordUpdated'
 
 
 
@@ -37,6 +41,12 @@ function App() {
         <Route path={paths.verification_email_fail} element={<FailedEmailVerification/>}></Route>
         <Route path={paths.verification_email_done} element={<AlreadyVerifiedEmail/>}></Route>
         <Route path={paths.verification_verifyemail} element={<VerifyEmail/>}></Route>
+
+        {/* Forgot-Password Routes */}
+        <Route path={paths.forgotpassword} element={<ForgotPassword/>}></Route>
+        <Route path={paths.forgotpassword_reset} element={<ForgotPasswordReset/>}></Route>
+        <Route path={paths.forgotpassword_emailsent} element={<LinkSentForgotPassword/>}></Route>
+        <Route path={paths.forgotpassword_updated} element={<PasswordUpdated/>}></Route>
 
 
         {/* Private Routes */}

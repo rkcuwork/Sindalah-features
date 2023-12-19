@@ -91,15 +91,16 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
 
     useEffect(() => {
       const cookieFallback = localStorage.getItem("cookieFallback");
+      const forgot_password = localStorage.getItem("forgot_password");
       
       if (
-        cookieFallback === "[]" ||
+        (cookieFallback === "[]" ||
         cookieFallback === null ||
-        cookieFallback === undefined
+        cookieFallback === undefined) && !forgot_password
       ) {
         navigate(paths.signin);
       }
-      else if(!cookie.emailVerification && location.pathname !== paths.verification_verifyemail){
+      else if(!cookie.emailVerification && location.pathname !== paths.verification_verifyemail && !forgot_password){
         navigate(paths.verification_email);
       }
   
