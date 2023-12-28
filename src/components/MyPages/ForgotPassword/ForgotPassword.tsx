@@ -53,17 +53,17 @@ const ForgotPassword = () => {
   return (
     <Form {...form}>
         <div className="flex w-full justify-center items-center">
-            {/* Left side with an image */}
+      
             <div className="hidden xl:block flex-1 p-8 ">
                 <img src="assets/MyImages/forgot_password.png" alt="Forgot Password Image" className='object-cover bg-no-repeat' />
             </div>
 
-            {/* Right side with the forgot password form */}
+            
             <div className="flex-1  p-8 flex-col max-xl:text-center ">
                 <h1 className="text-3xl font-bold mb-3 ">Forgot Password</h1>
                 <p className='mb-8'>Enter your email and we'll send you a link to reset your password.</p>
 
-                {/* Use your form library (e.g., React Hook Form) for form handling */}
+         
                 <form onSubmit={form.handleSubmit(handleSubmit)} className="flex-col gap-5 mt-4 ">
 
                     <FormField

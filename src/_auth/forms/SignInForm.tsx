@@ -22,7 +22,6 @@ import { encrypt } from "@/lib/HelperFunctions/Helper";
  
 const SignInForm = () => {
   const { toast } = useToast();
-  // const isloading = false;
   const navigate = useNavigate();
   const [cookies] = useCookies();
   
@@ -38,8 +37,7 @@ const SignInForm = () => {
   
   const {mutateAsync: signInAccount, isPending:isSigningIn} = useSignInAccount();
   const {mutateAsync: isEmailVerified, isPending:isEmailVerifying} = useIsEmailVerified();
-  // console.log(isSigningIn);
-    // 1. Define your form.
+
   const form = useForm<z.infer<typeof SignInValidation>>({
     resolver: zodResolver(SignInValidation),
     defaultValues: {
@@ -48,7 +46,7 @@ const SignInForm = () => {
     },
   })
  
-  // 2. Define a submit handler.
+
   async function onSubmit(values: z.infer<typeof SignInValidation>) {
 
     const session = await signInAccount({
@@ -58,17 +56,16 @@ const SignInForm = () => {
     if(!session){
       return  toast({
         title: "Sign In Failed. Please Try Again.",
-        // description: "Friday, February 10, 2023 at 5:57 PM",
       })
     }
 
     const isLoggedIn = await checkAuthUser();
     const verifiedEmail = await isEmailVerified();
-    // console.log("cookie = ",cookies.emailVerification);
+
 
     if(isLoggedIn && verifiedEmail){
       form.reset();
-      // setCookie('emailVerification', true, { path: '/'});
+
       return navigate(paths.main);
     }
     else if(isLoggedIn){
@@ -79,7 +76,7 @@ const SignInForm = () => {
     else{
       return  toast({
         title: "Sign In Failed. Please Try Again.",
-        // description: "Friday, February 10, 2023 at 5:57 PM",
+
       })
     }
   }

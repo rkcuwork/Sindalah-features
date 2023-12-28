@@ -41,17 +41,15 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
     const location = useLocation();
 
     const checkAuthUser = async () =>{
-      console.log("checkAuthUser called");
+
       setisLoading(true);
       try {
         const currentAccount = await getCurrentUser();
-        console.log('currentAccount = >', currentAccount)
         
         if(currentAccount){
-          console.log("setting user")
           localStorage.setItem('user', JSON.stringify(currentAccount));
           setCookie('emailVerification', currentAccount.emailVerification, { path: '/'});
-          // console.log("cookie auth = ",cookie.emailVerification);
+
           setUser({
             id: currentAccount.$id,
             name: currentAccount.name,
@@ -63,14 +61,13 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
             isPhoneVerified: currentAccount.phoneVerification,
           });
 
-          console.log({currentAccount});
+
 
           if(currentAccount.emailVerification){
             navigate(paths.main)
           }
           setIsAuthenticated(true);
           setisLoading(false);
-          // console.log("user in authcontext -> ",user);
           return true;
         }
         return false;
@@ -84,10 +81,7 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
       }
     };
 
-    // useEffect(() => {
-    //   console.log("user changed = ",user)
-    //   localStorage.setItem('user', JSON.stringify(user));
-    // }, [user]);
+
 
     useEffect(() => {
       const cookieFallback = localStorage.getItem("cookieFallback");
@@ -103,8 +97,6 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
       else if(!cookie.emailVerification && location.pathname !== paths.verification_verifyemail && !forgot_password){
         navigate(paths.verification_email);
       }
-  
-      // checkAuthUser();
     }, []);
 
     

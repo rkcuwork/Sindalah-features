@@ -23,7 +23,6 @@ const PasswordUpdated = () => {
         
             <img src={tickImageUrl} alt="Email Icon" className="w-16 h-16 rounded-full mb-4" />
             <h1 className="text-4xl font-bold mb-4">
-                {/* {if(cookie.EmailVerification)} */}
                 Password Reset Successfull</h1>
             <p className="text-lg mb-4">
             Sign in to continue.

@@ -1,8 +1,7 @@
 
 import { useSendVerificationEmailLink, useUpdateEmail } from "@/lib/React-Query/QueriesAndMutatiions";
 import { useToast } from "@/components/ui/use-toast"
-// import { useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -19,7 +18,6 @@ const EmailVerification =  () => {
   const [userEmail,setUserEmail] = useState("");
   const [isPopoverOpen, setPopoverOpen] = useState(false);
   const [cookies] = useCookies();
-  // const [emailUpdateFailed,setEmailUpdateFailed] = useState(false);
   const [newEmail,setNewEmail] = useState("");
   const [message,setMessage] = useState("");
 
@@ -54,7 +52,7 @@ const EmailVerification =  () => {
       else{
         return  toast({
           title: "Verification email was not sent. Please Try Again.",
-          // description: "Friday, February 10, 2023 at 5:57 PM",
+
         })
       }
     }
@@ -111,23 +109,18 @@ const EmailVerification =  () => {
             </div>):
             ("Send Link")}
         </button>
-        {/* <button
-          className="w-1/2 bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring focus:border-gray-400"
-          onClick={() => console.log('Update Email button clicked')}
-        >
-          Update Email
-        </button> */}
+
         <Popover open={isPopoverOpen} onOpenChange={(isOpen) => setPopoverOpen(isOpen)}>
           <PopoverTrigger className="w-1/2 bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring focus:border-gray-400">Update Email</PopoverTrigger>
           <PopoverContent>
-          {/* <div className="min-h-screen flex items-center justify-center bg-black mx-auto "> */}
+
             <div className="bg-gray-800 p-8 rounded-md shadow-md w-full sm:w-96 text-center ">
               <h2 className="text-2xl font-semibold text-white mb-4">Update Email</h2>
               <p className="text-gray-400 mb-6">
                 Enter your new email address below:
               </p>
               
-              {/* Input and Button */}
+    
               <div className="mb-4">
                 <input
                   type="email"
@@ -151,7 +144,7 @@ const EmailVerification =  () => {
                 
               </button>
             </div>
-          {/* </div> */}
+
           </PopoverContent>
         </Popover>
       </div>

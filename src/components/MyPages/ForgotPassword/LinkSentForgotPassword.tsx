@@ -15,12 +15,8 @@ const LinkSentForgotPassword = () => {
     <div className="flex items-center justify-center flex-col m-auto h-screen">
         
             <img src={emailImageUrl} alt="Email Icon" className="w-16 h-16 rounded-full mb-4" />
-            <h1 className="text-4xl font-bold mb-4">
-                {/* {if(cookie.EmailVerification)} */}
-                Email Sent</h1>
-            {/* <p className="text-lg mb-4">
-              An email containing a reset password link has been sent to your email address.
-            </p> */}
+            <h1 className="text-4xl font-bold mb-4">Email Sent</h1>
+        
             <p className="text-lg mb-8">
               Please check your inbox and click on the link to reset your account password.
             </p>

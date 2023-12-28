@@ -6,14 +6,6 @@ import { paths } from "@/lib/HelperFunctions/Path";
 
 const AlreadyVerifiedEmail = () => {
     const navigate = useNavigate();
-    // const [cookie] = useCookies();
-    // useEffect(()=> {
-    //     const emailVerified = cookie.emailVerification;
-    //     if(!emailVerified){
-    //         navigate("/Sindalah/verify/email");
-    //     }
-
-    // },[])
 
     const handleMainPageBtnClick = () =>{
         navigate(paths.main)
@@ -24,7 +16,6 @@ const AlreadyVerifiedEmail = () => {
         
             <img src={tickImageUrl} alt="Email Icon" className="w-16 h-16 rounded-full mb-4" />
             <h1 className="text-4xl font-bold mb-4">
-                {/* {if(cookie.EmailVerification)} */}
                 Your email has already been verified</h1>
             <p className="text-lg mb-4">
             Explore and engage with the community on our main page

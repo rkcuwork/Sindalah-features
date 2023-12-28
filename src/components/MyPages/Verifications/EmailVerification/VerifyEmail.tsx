@@ -31,7 +31,6 @@ const VerifyEmail = () => {
           const email = await verifyEmail(userId, secret);
           if(email){
               setCookie('emailVerification', true, { path: '/' });
-              // setCookie('EmailVerificationhttponly', true, { path: '/', httpOnly: true });
               setIsEmailVerified(true);
               localStorage.removeItem("VerificationEmailSent");
               localStorage.removeItem("p");
@@ -67,7 +66,6 @@ const VerifyEmail = () => {
             </div> }
             
             <h1 className={`text-4xl font-bold mb-4 `}>
-                {/* {if(cookie.EmailVerification)} */}
                 {isEmailVerified? "Email Verification Successful: Your account is now verified": "Verifying..."}
               </h1>
             <p className={`text-lg mb-4 ${isEmailVerified? "": "hidden"}`}>

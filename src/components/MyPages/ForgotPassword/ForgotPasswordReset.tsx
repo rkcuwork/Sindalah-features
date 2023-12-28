@@ -83,7 +83,7 @@ const ForgotPasswordReset = () => {
             <div className="flex items-center justify-center flex-col m-auto h-screen">
                 <img src={crossImageUrl} alt="Email Icon" className="w-16 h-16 rounded-full mb-4" />
                 <h1 className="text-4xl font-bold mb-4">
-                    {/* {if(cookie.EmailVerification)} */}
+                   
                     Link is not valid</h1>
                 <p className="text-lg mb-4">
                 Please try again.

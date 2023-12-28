@@ -24,7 +24,6 @@ const FailedEmailVerification = () => {
         
             <img src={crossImageUrl} alt="Email Icon" className="w-16 h-16 rounded-full mb-4" />
             <h1 className="text-4xl font-bold mb-4">
-                {/* {if(cookie.EmailVerification)} */}
                 Email Verification Failed</h1>
             <p className="text-lg mb-4">
             Please try again.

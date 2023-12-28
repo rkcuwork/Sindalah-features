@@ -22,7 +22,7 @@ import { encrypt } from "@/lib/HelperFunctions/Helper";
  
 const SignUpForm = () => {
   const { toast } = useToast();
-  // const isloading = false;
+
   const navigate = useNavigate();
   const [cookies] = useCookies();
 
@@ -33,13 +33,12 @@ const SignUpForm = () => {
   },[])
 
   const {checkAuthUser, isLoading:isUserLoading} = useUserContext();
-  // console.log(isUserLoading);
+
   
   const {mutateAsync: createUserAccount, isPending: isCreatingAccount} = useCreateUserAccount();
   
   const {mutateAsync: signInAccount, isPending: isSigningIn} = useSignInAccount();
-  // console.log(isSigningIn);
-    // 1. Define your form.
+
   const form = useForm<z.infer<typeof SignUpValidation>>({
     resolver: zodResolver(SignUpValidation),
     defaultValues: {
@@ -50,13 +49,13 @@ const SignUpForm = () => {
     },
   })
  
-  // 2. Define a submit handler.
+
   async function onSubmit(values: z.infer<typeof SignUpValidation>) {
     const newUser = await createUserAccount(values);
     if(!newUser){
       return toast({
         title: "Sign Up Failed. Please Try Again.",
-        // description: "Friday, February 10, 2023 at 5:57 PM",
+
       })
     }
     console.log("New User : ",newUser,"PATH : src\_auth\forms\SignUpForm - SignUpForm");
@@ -68,7 +67,7 @@ const SignUpForm = () => {
     if(!session){
       return  toast({
         title: "Sign In Failed. Please Try Again.",
-        // description: "Friday, February 10, 2023 at 5:57 PM",
+
       })
     }
 
@@ -82,7 +81,6 @@ const SignUpForm = () => {
     else{
       return  toast({
         title: "Sign In Failed. Please Try Again.",
-        // description: "Friday, February 10, 2023 at 5:57 PM",
       })
     }
   }
