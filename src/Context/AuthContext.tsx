@@ -33,7 +33,11 @@ const AuthContext = createContext<IContextType>(INITIAL_STATE);
 
 const AuthProvider = ({children}:{children: React.ReactNode}) => {
 
-    const [user, setUser] = useState<IUser>(INITIAL_USER);
+    const lsUser = localStorage.getItem("user")
+
+
+
+    const [user, setUser] = useState<IUser>(lsUser? JSON.parse(lsUser):INITIAL_USER);
     const [isLoading, setisLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [cookie,setCookie] = useCookies();
@@ -47,10 +51,15 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
         const currentAccount = await getCurrentUser();
         
         if(currentAccount){
+<<<<<<< HEAD
           localStorage.setItem('user', JSON.stringify(currentAccount));
           setCookie('emailVerification', currentAccount.emailVerification, { path: '/'});
 
           setUser({
+=======
+          // console.log("setting user")
+          const currentUser = {
+>>>>>>> F3_Home_Page
             id: currentAccount.$id,
             name: currentAccount.name,
             username: currentAccount.username,
@@ -59,7 +68,11 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
             bio: currentAccount.bio,
             isEmailVerified:  currentAccount.emailVerification,
             isPhoneVerified: currentAccount.phoneVerification,
-          });
+          };
+          localStorage.setItem('user', JSON.stringify(currentUser));
+
+          setCookie('emailVerification', currentAccount.emailVerification, { path: '/'});
+          setUser(currentUser);
 
 
 

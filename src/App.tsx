@@ -1,7 +1,7 @@
 import AuthLayout from './_auth/AuthLayout'
 import SignInForm from './_auth/forms/SignInForm'
 import SignUpForm from './_auth/forms/SignUpForm'
-import { Home } from './_root/Pages'
+import { AllUsers, CreatePost, Explore, Home, Post, Profile, Saved, UpdatePost, UpdateProfile } from './_root/Pages'
 import RootLayout from './_root/RootLayout'
 import './globals.css'
 import {Routes, Route, } from 'react-router-dom'
@@ -17,6 +17,7 @@ import ForgotPassword from './components/MyPages/ForgotPassword/ForgotPassword'
 import ForgotPasswordReset from './components/MyPages/ForgotPassword/ForgotPasswordReset'
 import LinkSentForgotPassword from './components/MyPages/ForgotPassword/LinkSentForgotPassword'
 import PasswordUpdated from './components/MyPages/ForgotPassword/PasswordUpdated'
+import SignOut from './components/MyPages/SignOut/SignOut'
 
 
 
@@ -29,6 +30,7 @@ function App() {
         <Route  element={<AuthLayout/>}>
           <Route path={paths.signin} element={<SignInForm/>}/>
           <Route path={paths.signup} element={<SignUpForm/>}/>
+          <Route path={paths.signout} element={<SignOut/>}/>
         </Route>
 
         {/* Verification Routes */}
@@ -52,6 +54,14 @@ function App() {
         {/* Private Routes */}
         <Route path={paths.main} element={<RootLayout/>}>
           <Route index element={<Home/>}/>
+          <Route path={paths.explore} element={<Explore/>}/>
+          <Route path={paths.saved} element={<Saved/>}/>
+          <Route path={paths.allusers} element={<AllUsers/>}/>
+          <Route path={paths.createpost} element={<CreatePost/>}/>
+          <Route path={paths.updatepost} element={<UpdatePost/>}/>
+          <Route path={paths.post} element={<Post/>}/>
+          <Route path={paths.profile} element={<Profile/>}/>
+          <Route path={paths.updateprofile} element={<UpdateProfile/>}/>
         </Route>
 
 
