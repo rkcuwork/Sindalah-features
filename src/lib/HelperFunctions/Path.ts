@@ -1,4 +1,4 @@
-const start_url = "http://localhost:5173";
+const start_url = "https://rkcuwork.github.io";
 
 const base = "/Sindalah-features";
 const main = "/Sindalah-features";
