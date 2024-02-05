@@ -45,10 +45,11 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
     const location = useLocation();
 
     const checkAuthUser = async () =>{
-
+      console.log("checkAuthUser called");
       setisLoading(true);
       try {
         const currentAccount = await getCurrentUser();
+        console.log('currentAccount = >', currentAccount)
         
         if(currentAccount){
           // console.log("setting user")
@@ -67,13 +68,14 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
           setCookie('emailVerification', currentAccount.emailVerification, { path: '/'});
           setUser(currentUser);
 
-
+          console.log({currentAccount});
 
           if(currentAccount.emailVerification){
             navigate(paths.main)
           }
           setIsAuthenticated(true);
           setisLoading(false);
+          // console.log("user in authcontext -> ",user);
           return true;
         }
         return false;
