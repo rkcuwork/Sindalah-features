@@ -51,15 +51,8 @@ const AuthProvider = ({children}:{children: React.ReactNode}) => {
         const currentAccount = await getCurrentUser();
         
         if(currentAccount){
-<<<<<<< HEAD
-          localStorage.setItem('user', JSON.stringify(currentAccount));
-          setCookie('emailVerification', currentAccount.emailVerification, { path: '/'});
-
-          setUser({
-=======
           // console.log("setting user")
           const currentUser = {
->>>>>>> F3_Home_Page
             id: currentAccount.$id,
             name: currentAccount.name,
             username: currentAccount.username,
